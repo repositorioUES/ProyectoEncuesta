@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 #Tabla Usuario
 class Usuario(models.Model):
 	dui = models.CharField(primary_key = True, max_length = 10)
@@ -37,3 +38,7 @@ class Municipio(models.Model):
 
 	def __str__(self):
 		return self.nombreMunicipio
+
+	
+
+	
