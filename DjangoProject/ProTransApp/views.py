@@ -1,23 +1,20 @@
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from ProTransApp.models import Usuario
-from ProTransApp.forms import UsuarioForm
-from django.views import generic
+from django.shortcuts import render
+from django.urls import reverse,reverse_lazy
+from django.views.generic import TemplateView,CreateView
+from .models import Usuario
+from .forms import UsuarioForm
 
 # Create your views here.
 
-def home(request):
-	return render(request, 'index.html')
+class Inicio(TemplateView):
+	template_name = 'index.html'
 
-def CrearUsuario(request):
-	if request.method == 'POST':
-		formulario = UsuarioForm(request.POST)
-		if formulario.is_valid():
-			formulario.save()
-		return redirect('home')
-	else:
-		formulario = UsuarioForm()
 
-	return render(request, 'CrearUsuario.html', {'formulario':formulario})
+class UsuarioCrear(CreateView):
+	model = Usuario
+	form_class = UsuarioForm
+	template_name = 'Usuario_Form.html'
+	success_url = reverse_lazy('inicio')
+
+
+

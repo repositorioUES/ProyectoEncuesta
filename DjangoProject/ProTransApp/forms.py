@@ -1,36 +1,33 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from ProTransApp.models import Usuario
+from .models import Usuario
 
-#Formulario para crear usuario
 class UsuarioForm(forms.ModelForm):
 	class Meta:
 		model = Usuario
-
 		fields = [
-			'dui',
-			'nombre',
-			'apellidos',
-			'edad',
-			'sexo',
-			'domicilio',
+		'dui',
+		'nombre',
+		'apellidos',
+		'edad',
+		'sexo',
+		'domicilio',
 		]
 
-		labels = {
-			'dui':'DUI',
-			'nombre':'Nombre',
-			'apellido':'Apellido',
-			'edad':'edad',
-			'sexo':'sexo',
-			'domicilio':'domicilio',
+		labels = { 
+		'dui' : 'Documento de Identidad',
+		'nombre' : 'Nombres',
+		'apellidos' :'Apellidos',
+		'edad' : 'Edad',
+		'sexo' : 'Sexo',
+		'domicilio' : 'Domicilio',
 		}
 
 		widgets = {
-			'dui':forms.TextInput(attrs={'class':'form-control'}),
-			'nombre':forms.TextInput(attrs={'class':'form-control'}),
-			'apellido':forms.TextInput(attrs={'class':'form-control'}),
-			'edad':forms.TextInput(attrs={'class':'form-control'}),
-			'sexo':forms.TextInput(attrs={'class':'form-control'}),
-			'domicilo':forms.TextInput(attrs={'class':'form-control'}),
+			'dui':forms.TextInput(attrs={'placeholder': "ingrese su número de DUI",'class':'form-control'}),
+			'nombre':forms.TextInput(attrs={'placeholder': "ingrese sus nombres",'class':'form-control'}),
+			'apellidos':forms.TextInput(attrs={'placeholder': "ingrese sus apellidos",'class':'form-control'}),
+			'edad':forms.NumberInput(attrs={'placeholder': "ingrese su edad",'class':'form-control'}),
+			'sexo':forms.TextInput(attrs={'placeholder': "ingrese Femenino o Masculino",'class':'form-control'}),
+			'domicilio':forms.TextInput(attrs={'placeholder': "ingrese su dirección completa ",'class':'form-control'}),
 		}
+		

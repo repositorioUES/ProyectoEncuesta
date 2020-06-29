@@ -1,10 +1,9 @@
 
 from django.urls import path
-from .views import home, CrearUsuario
-
+from .views import Inicio,UsuarioCrear
 
 urlpatterns = [
-   path('', home, name='home'),
-  
+  path('', Inicio.as_view(), name = 'inicio'),
+  path('CrearUsuario/', UsuarioCrear.as_view(), name= 'crear_usuario'),
     
 ]
