@@ -15,6 +15,6 @@ class UsuarioCrear(CreateView):
 	form_class = UsuarioForm
 	template_name = 'Usuario_Form.html'
 	success_url = reverse_lazy('inicio')
-
+	
 
 

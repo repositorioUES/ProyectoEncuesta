@@ -11,6 +11,7 @@ class UsuarioForm(forms.ModelForm):
 		'edad',
 		'sexo',
 		'domicilio',
+		'tipo_transporte'
 		]
 
 		labels = { 
@@ -20,6 +21,7 @@ class UsuarioForm(forms.ModelForm):
 		'edad' : 'Edad',
 		'sexo' : 'Sexo',
 		'domicilio' : 'Domicilio',
+		'tipo_transporte' : 'Seleccione tipo de transporte  1-Publico  2-Privado' ,
 		}
 
 		widgets = {
@@ -29,5 +31,7 @@ class UsuarioForm(forms.ModelForm):
 			'edad':forms.NumberInput(attrs={'placeholder': "ingrese su edad",'class':'form-control'}),
 			'sexo':forms.TextInput(attrs={'placeholder': "ingrese Femenino o Masculino",'class':'form-control'}),
 			'domicilio':forms.TextInput(attrs={'placeholder': "ingrese su dirección completa ",'class':'form-control'}),
+			'tipo_transporte':forms.TextInput(attrs={'placeholder': "ingrese 1 o 2 ",'class':'form-control'}),
 		}
 		
+

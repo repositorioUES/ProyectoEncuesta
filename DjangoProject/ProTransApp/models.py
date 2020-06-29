@@ -10,6 +10,7 @@ class Usuario(models.Model):
 	edad = models.IntegerField()
 	sexo = models.CharField(max_length = 10)
 	domicilio = models.CharField(max_length = 50)
+	tipo_transporte = models.ForeignKey('Tipo_transporte', on_delete = models.SET_NULL, null=True)
 
 	def __str__(self):
 		return self.nombre
