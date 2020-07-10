@@ -1,62 +1,50 @@
-{% load staticfiles %}
-<!doctype html>
-<html lang="es">
-<head>
-	<meta charset="utf-8">
-	<title>{% block title %}Inicio{% endblock %} </title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/usebootstrap.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" media="screen">
-	
+  {% load staticfiles %}
+  <!doctype html>
+  <html lang="es">
+  <head>
+  	<meta charset="utf-8">
+  	<title>{% block title %}Inicio{% endblock %} </title>
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/usebootstrap.css' %}">
+  	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" media="screen">
+  	
 
-</head>
+  </head>
 
-<body>
+  <body>
   {% block navbar %}
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="{% url 'inicio' %}" class="navbar-brand">Ir a Inicio</a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          
-		  <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="{% url 'crear_usuario' %}">Realizar reclamo</a>
-            </li>
-            <li class="dropdown">
-              <a href="">Consultar reclamo</a>
-            </li>
-		  </ul>
-		  
-		  <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" target="_blank">Login</a></li>
-		  </ul>
-		  
+  <div class="col-lg-3">
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+              <a href="{% url 'inicio' %}" class="navbar-brand">HOME</a>
+            </div>  
+          <div class="navbar-collapse collapse" id="navbar-main">          
+        		   <ul class="nav navbar-nav">
+                  <li class="dropdown"><a href="{% url 'crear_usuario' %}">Realizar reclamo</a></li>                    
+        		  </ul>
+        		   <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown"><a href="#">Consultar reclamos</a></li>
+                  <li><a href="#" target="_blank">Login</a></li>  
+        		  </ul>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
+  {% endblock %} 
+
+  {% block content %}
+  <h1></h1>
+  {% endblock %}
+
+
+  {% block footer %}
+  <h2></h2>
+  {% endblock%}
+
 
     
-    {% endblock %} 
-
-    {% block content %}
-    <h1></h1>
-    {% endblock %}
-
-
-    {% block footer %}
-    <h2></h2>
-    {% endblock%}
-
-
-  
-	<script> src= "{% static 'js/bootstrap.min.js' %}"</script>
-	<script> src= "{% static 'js/usebootstrap.js.js' %}"</script>
-</body>
-</html>
+  	<script> src= "{% static 'js/bootstrap.min.js' %}"</script>
+  	<script> src= "{% static 'js/usebootstrap.js.js' %}"</script>
+  </body>
+  </html>

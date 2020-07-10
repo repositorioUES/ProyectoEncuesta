@@ -1,17 +1,10 @@
 {% extends 'index.html' %}
 {% block title %}Crear registro{% endblock %}
-{% block navbar2 %}
- 			<li class="dropdown">
-              <a href="">Consultar reclamo</a>
-            </li>
-
-{% endblock %}
-
 {% block content %}
 <div class="container">
 	<div class ="row justify-content center">
 		<div class="col-xs-7">
-			<h1 class="mt-2">Ingrese sus datos personales</h1>
+			<h2 class="mt-2">Registro de Usuario</h2>
 			<hr class="mt-0 mb-4">
 			<form method="post" >
 			{% csrf_token %}
