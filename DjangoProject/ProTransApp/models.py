@@ -41,5 +41,23 @@ class Municipio(models.Model):
 		return self.nombreMunicipio
 
 	
+class Reclamo(models.Model):
+    idreclamo = models.IntegerField(primary_key=True)
+    dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')
+    descripcion = models.TextField(blank=True, null=True)
 
-	
+    class Meta:
+        managed = True
+        db_table = 'reclamo'
+
+
+class Respuesta(models.Model):
+    idrespuesta = models.IntegerField(primary_key=True)
+    idreclamo = models.ForeignKey(Reclamo, models.DO_NOTHING, db_column='idreclamo', blank=True, null=True)
+    dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')
+    numerodepregunta = models.IntegerField()
+
+    class Meta:
+        managed = True
+        db_table = 'respuesta'
+
