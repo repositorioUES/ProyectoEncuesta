@@ -40,7 +40,6 @@ class Municipio(models.Model):
 	def __str__(self):
 		return self.nombreMunicipio
 
-	
 class Reclamo(models.Model):
     idreclamo = models.IntegerField(primary_key=True)
     dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')
@@ -61,3 +60,7 @@ class Respuesta(models.Model):
         managed = True
         db_table = 'respuesta'
 
+class Reclamo(models.Model):
+	usuario = models.OneToOneField(Usuario, on_delete = models.CASCADE, primary_key=True)
+	
+	

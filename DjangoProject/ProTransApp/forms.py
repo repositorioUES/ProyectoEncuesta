@@ -21,7 +21,7 @@ class UsuarioForm(forms.ModelForm):
 		'edad' : 'Edad',
 		'sexo' : 'Sexo',
 		'domicilio' : 'Domicilio',
-		'tipo_transporte' : 'Seleccione tipo de transporte  1-Publico  2-Privado' ,
+		'tipo_transporte' : 'Tipo de Transporte' ,
 		}
 
 		widgets = {
