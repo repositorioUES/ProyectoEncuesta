@@ -10,14 +10,14 @@ class Usuario(models.Model):
 	edad = models.IntegerField()
 	sexo = models.CharField(max_length = 10)
 	domicilio = models.CharField(max_length = 50)
-	tipo_transporte = models.ForeignKey('Tipo_transporte', on_delete = models.SET_NULL, null=True)
+	tipo_transporte = models.ForeignKey('Tipo_transporte', models.DO_NOTHING, db_column='tipo_transporte')
 
 	def __str__(self):
 		return self.nombre
 
 #Tabla Tipo_transporte
 class Tipo_transporte (models.Model):
-	id = models.AutoField(primary_key = True)
+	tipo_transporte = models.AutoField(primary_key = True)
 	tipoTransporte = models.CharField(max_length = 20)
 
 	def __str__(self):
@@ -41,7 +41,7 @@ class Municipio(models.Model):
 		return self.nombreMunicipio
 
 class Reclamo(models.Model):
-    idreclamo = models.IntegerField(primary_key=True)
+    idreclamo = models.AutoField(primary_key=True)
     dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')
     descripcion = models.TextField(blank=True, null=True)
 
@@ -51,8 +51,8 @@ class Reclamo(models.Model):
 
 
 class Respuesta(models.Model):
-    idrespuesta = models.IntegerField(primary_key=True)
-    idreclamo = models.ForeignKey(Reclamo, models.DO_NOTHING, db_column='idreclamo', blank=True, null=True)
+    idrespuesta = models.AutoField(primary_key=True)
+    #idreclamo = models.ForeignKey(Reclamo, models.DO_NOTHING, db_column='idreclamo', blank=True, null=True)
     dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')
     numerodepregunta = models.IntegerField()
 

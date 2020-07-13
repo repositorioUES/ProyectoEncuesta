@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ProTransApp',
     
 ]
-]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

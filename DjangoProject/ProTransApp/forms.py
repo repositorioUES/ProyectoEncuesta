@@ -1,5 +1,6 @@
 from django import forms
 from .models import Usuario
+from .models import Respuesta
 
 class UsuarioForm(forms.ModelForm):
 	class Meta:
@@ -35,3 +36,11 @@ class UsuarioForm(forms.ModelForm):
 		}
 		
 
+class RespuestaForm(forms.ModelForm):
+	class Meta:
+		model = Respuesta
+		fields = [
+		'dui',
+		'idrespuesta',
+		'numerodepregunta'
+		]
