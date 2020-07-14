@@ -60,7 +60,3 @@ class Respuesta(models.Model):
         managed = True
         db_table = 'respuesta'
 
-class Reclamo(models.Model):
-	usuario = models.OneToOneField(Usuario, on_delete = models.CASCADE, primary_key=True)
-	
-	

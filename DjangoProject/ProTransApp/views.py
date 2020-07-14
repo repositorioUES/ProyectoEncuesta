@@ -12,6 +12,7 @@ class Inicio(TemplateView):
 
 
 #noDui = ""
+#Vista Basada en clase
 class UsuarioCrear(CreateView):
 	model = Usuario
 	form_class = UsuarioForm
@@ -82,7 +83,7 @@ def guardarDatosEncuesta(request):
 		if respuesta5 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta5)
 			respuesta.save()
-			print(pregunta5, 'EL VALOR ES CORRECTO')
+			print(pregunta5, ' EL VALOR ES CORRECTO')
 	
 	pregunta6 = request.POST.get('p6')
 	if pregunta6 != None:
