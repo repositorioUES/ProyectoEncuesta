@@ -8,7 +8,8 @@ class Usuario(models.Model):
 	nombre = models.CharField(max_length = 30)
 	apellidos = models.CharField(max_length = 30)
 	edad = models.IntegerField()
-	sexo = models.CharField(max_length = 10)
+	sexos = (('F','Femenino'),('M', 'Masculino'))
+	sexo = models.CharField(max_length = 1,choices=sexos)
 	domicilio = models.CharField(max_length = 50)
 	tipo_transporte = models.ForeignKey('Tipo_transporte', models.DO_NOTHING, db_column='tipo_transporte')
 
@@ -60,3 +61,6 @@ class Respuesta(models.Model):
         managed = True
         db_table = 'respuesta'
 
+
+	
+	

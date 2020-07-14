@@ -22,10 +22,10 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [{% for item in qs %}'{{item.nombre}} {{item.apellidos}}',{% endfor %}],
+                labels: ['Pregunta 1','Pregunta 2','Pregunta 3','Pregunta 4','Pregunta 5','Pregunta 6','Pregunta 8','Pregunta 8','Pregunta 9',],
                 datasets: [{
                     label: '# de Votos',
-                    data: [{% for item in qs %}'{{item.edad}}',{% endfor %}],
+                    data: [{{ p1 }},{{p2}},{{p3}},{{p4}},{{p5}},{{p6}},{{p7}},{{p8}},{{p9}}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

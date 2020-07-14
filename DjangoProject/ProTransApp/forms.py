@@ -15,7 +15,7 @@ class UsuarioForm(forms.ModelForm):
 		'tipo_transporte'
 		]
 
-		labels = { 
+		labels = {
 		'dui' : 'Documento de Identidad',
 		'nombre' : 'Nombres',
 		'apellidos' :'Apellidos',
@@ -30,7 +30,7 @@ class UsuarioForm(forms.ModelForm):
 			'nombre':forms.TextInput(attrs={'placeholder': "ingrese sus nombres",'class':'form-control'}),
 			'apellidos':forms.TextInput(attrs={'placeholder': "ingrese sus apellidos",'class':'form-control'}),
 			'edad':forms.NumberInput(attrs={'placeholder': "ingrese su edad",'class':'form-control'}),
-			'sexo':forms.TextInput(attrs={'placeholder': "ingrese Femenino o Masculino",'class':'form-control'}),
+			'sexo':forms.Select(attrs={'class':'form-control'}),
 			'domicilio':forms.TextInput(attrs={'placeholder': "ingrese su dirección completa ",'class':'form-control'}),
 			'tipo_transporte':forms.Select(attrs={'class':'form-control'}),
 		}

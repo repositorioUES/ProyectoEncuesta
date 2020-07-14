@@ -10,6 +10,19 @@ from django.shortcuts import redirect
 class Inicio(TemplateView):
 	template_name = 'index.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["qs"] = Usuario.objects.all()
+		context["p1"] = Respuesta.objects.filter(numerodepregunta=1).count()
+		context["p2"] = Respuesta.objects.filter(numerodepregunta=2).count()
+		context["p3"] = Respuesta.objects.filter(numerodepregunta=3).count()
+		context["p4"] = Respuesta.objects.filter(numerodepregunta=4).count()
+		context["p5"] = Respuesta.objects.filter(numerodepregunta=5).count()
+		context["p6"] = Respuesta.objects.filter(numerodepregunta=6).count()
+		context["p7"] = Respuesta.objects.filter(numerodepregunta=7).count()
+		context["p8"] = Respuesta.objects.filter(numerodepregunta=8).count()
+		context["p9"] = Respuesta.objects.filter(numerodepregunta=9).count()
+		return context
 
 #noDui = ""
 #Vista Basada en clase
@@ -17,6 +30,7 @@ class UsuarioCrear(CreateView):
 	model = Usuario
 	form_class = UsuarioForm
 	template_name = 'Usuario_Form.html'
+
 	def post(self, request, *args, **kwargs):
 		#global noDui
 		noDui = request.POST.get('dui') 
@@ -35,6 +49,7 @@ class UsuarioCrear(CreateView):
 def obtenerDui(request):
 	global numeroDui
 	numeroDui = request.POST.get('dui') 
+
 	
 def Encuesta(request):
 		if request.method == 'POST':
