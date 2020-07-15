@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
 from django.views.generic import TemplateView,CreateView
-from .models import Usuario, Respuesta, Tipo_transporte 
+from .models import Usuario, Respuesta, Tipo_transporte, Reclamo 
 from .forms import UsuarioForm, RespuestaForm
 from django.shortcuts import redirect
 
@@ -66,8 +66,16 @@ class UsuarioCrear(CreateView):
 		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte)
 		usuario.save()
 		obtenerDui(request)
+		crearReclamo(request)
 		return redirect('llenar_e')
 
+def crearReclamo(request):
+	usuario = Usuario.objects.get(dui =numeroDui)
+	existe = Reclamo.objects.filter(idreclamo = usuario).exists()
+	if existe != True:
+		reclamoADD = Reclamo(idreclamo = usuario, realizado = False) 
+		reclamoADD.save()
+			
 def obtenerDui(request):
 	global numeroDui
 	numeroDui = request.POST.get('dui') 
@@ -75,12 +83,14 @@ def obtenerDui(request):
 	
 def Encuesta(request):
 		if request.method == 'POST':
-			guardarDatosEncuesta(request)
+			guardarPreguntas(request)
+			actualizarReclamo(request)
 			print(numeroDui, "CAMBIO")
 			return redirect('inicio')
 		return render(request, 'llenarE.html')
 
-def guardarDatosEncuesta(request):
+def guardarPreguntas(request):
+	global bandera
 	usuario = Usuario.objects.get(dui =numeroDui)
 	pregunta1 = request.POST.get('p1')
 	if pregunta1 != None:
@@ -89,6 +99,7 @@ def guardarDatosEncuesta(request):
 			print(respuesta1,'FILTRO OBTENIDO')
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta1)
 			respuesta.save()
+			bandera = 1
 	
 	pregunta2 = request.POST.get('p2')
 	if pregunta2 != None:
@@ -96,6 +107,7 @@ def guardarDatosEncuesta(request):
 		if respuesta2 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta2)
 			respuesta.save()
+			bandera = 1
 			print(pregunta2, 'EL VALOR ES CORRECTO')
 	
 	pregunta3 = request.POST.get('p3')
@@ -104,6 +116,7 @@ def guardarDatosEncuesta(request):
 		if respuesta3 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta3)
 			respuesta.save()
+			bandera = 1
 			print(pregunta3, 'EL VALOR ES CORRECTO')
 	
 	pregunta4 = request.POST.get('p4')
@@ -112,6 +125,7 @@ def guardarDatosEncuesta(request):
 		if respuesta4 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta4)
 			respuesta.save()
+			bandera = 1
 			print(pregunta4, 'EL VALOR ES CORRECTO')
 	
 	pregunta5 = request.POST.get('p5')
@@ -121,6 +135,8 @@ def guardarDatosEncuesta(request):
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta5)
 			respuesta.save()
 			print(pregunta5, 'EL VALOR ES CORRECTO')
+			bandera = 1
+			print(pregunta5, ' EL VALOR ES CORRECTO')
 	
 	pregunta6 = request.POST.get('p6')
 	if pregunta6 != None:
@@ -128,6 +144,7 @@ def guardarDatosEncuesta(request):
 		if respuesta6 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta6)
 			respuesta.save()
+			bandera = 1
 			print(pregunta6, 'EL VALOR ES CORRECTO')
 	
 	pregunta7 = request.POST.get('p7')
@@ -136,6 +153,7 @@ def guardarDatosEncuesta(request):
 		if respuesta7 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta7)
 			respuesta.save()
+			bandera = 1
 			print(pregunta7, 'EL VALOR ES CORRECTO')
 	
 	pregunta8 = request.POST.get('p8')
@@ -144,6 +162,7 @@ def guardarDatosEncuesta(request):
 		if respuesta8 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta8)
 			respuesta.save()
+			bandera = 1
 			print(pregunta8, 'EL VALOR ES CORRECTO')
 	
 	pregunta9 = request.POST.get('p9')
@@ -152,6 +171,21 @@ def guardarDatosEncuesta(request):
 		if respuesta9 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta9)
 			respuesta.save()
+			bandera = 1
 			print(pregunta9, 'EL VALOR ES CORRECTO')
+
+def actualizarReclamo(request):
+	usuario = Usuario.objects.get(dui =numeroDui)
+	reclamo = Reclamo.objects.filter(idreclamo = usuario).exists()
+	#print(bandera, reclamo)
+	if bandera == 1 and reclamo == True:
+		preguntaOpcional = request.POST.get('campoOpcional')
+		Reclamo.objects.filter(idreclamo = usuario).update(descripcion = preguntaOpcional,realizado = True)
+		print("DENTRO DEL IF")
 		
+
+
+
+
+			
 
