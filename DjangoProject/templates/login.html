@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h2 class="mt-2">Ingrese sus datos</h2>
+      <hr class="mt-0 mb-4">
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <form action="" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" class="form-control" name="username" placeholder="Ingrese su usuario">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" name="password" placeholder="Ingrese su contraseña">
+          </div>
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

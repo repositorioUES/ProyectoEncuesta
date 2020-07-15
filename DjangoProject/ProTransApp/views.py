@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 from django.urls import reverse,reverse_lazy
 from django.views.generic import TemplateView,CreateView
 from .models import Usuario, Respuesta, Tipo_transporte 
@@ -7,6 +10,26 @@ from django.shortcuts import redirect
 
 # Create your views here.
 #model = None
+
+def loginT(request):
+	if request.method == "POST":
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(request, username=username, password=password)
+		print(user)
+		if user is not None:
+			login(request,user)
+			return HttpResponseRedirect(reverse('inicio'))
+		else:
+			messages.error(request,'Credenciales incorrectas')
+
+	return render(request,'login.html',{})
+
+def logoutT(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('inicio'))
+
+
 class Inicio(TemplateView):
 	template_name = 'index.html'
 
@@ -25,7 +48,6 @@ class Inicio(TemplateView):
 		return context
 
 #noDui = ""
-#Vista Basada en clase
 class UsuarioCrear(CreateView):
 	model = Usuario
 	form_class = UsuarioForm
@@ -98,7 +120,7 @@ def guardarDatosEncuesta(request):
 		if respuesta5 != True:
 			respuesta = Respuesta(dui = usuario, numerodepregunta = pregunta5)
 			respuesta.save()
-			print(pregunta5, ' EL VALOR ES CORRECTO')
+			print(pregunta5, 'EL VALOR ES CORRECTO')
 	
 	pregunta6 = request.POST.get('p6')
 	if pregunta6 != None:
