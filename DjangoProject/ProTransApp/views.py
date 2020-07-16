@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
-from django.views.generic import TemplateView,CreateView
+from django.views.generic import TemplateView,CreateView,ListView,View
 from .models import Usuario, Respuesta, Tipo_transporte,Departamento,Municipio
 from .models import Usuario, Respuesta, Tipo_transporte, Reclamo 
 from .forms import UsuarioForm, RespuestaForm
@@ -107,6 +107,7 @@ def obtenerDui(request):
 
 	
 def Encuesta(request):
+		global bandera
 		if request.method == 'POST':
 			guardarPreguntas(request)
 			actualizarReclamo(request)
@@ -115,7 +116,6 @@ def Encuesta(request):
 		return render(request, 'llenarE.html')
 
 def guardarPreguntas(request):
-	global bandera
 	usuario = Usuario.objects.get(dui =numeroDui)
 	pregunta1 = request.POST.get('p1')
 	if pregunta1 != None:
@@ -201,16 +201,78 @@ def guardarPreguntas(request):
 
 def actualizarReclamo(request):
 	usuario = Usuario.objects.get(dui =numeroDui)
-	reclamo = Reclamo.objects.filter(idreclamo = usuario).exists()
+	res = Respuesta.objects.filter(dui = usuario).exists()
 	#print(bandera, reclamo)
-	if bandera == 1 and reclamo == True:
+	if res == True:
 		preguntaOpcional = request.POST.get('campoOpcional')
 		Reclamo.objects.filter(idreclamo = usuario).update(descripcion = preguntaOpcional,realizado = True)
 		print("DENTRO DEL IF")
+
+class ListaUsuario(ListView):
+		template_name = 'listarUsuarios.html'
+		#context_objects_name = 'reclamos'
+		#queryset = Reclamo.objects.all()
+		def get(self, request, *args, **kwargs):
+			reclamos = Reclamo.objects.all()
+			respuestas = Respuesta.objects.all()
+			return render(request,self.template_name, {'reclamos':reclamos, 'respuestas':respuestas})
+
+def mantenerUsuario(request, iD):
+	usuario = Usuario.objects.get(dui = iD)
+	reclamo = Reclamo.objects.get(idreclamo = usuario)
+	#respuestas = Respuesta.objects.filter(dui = usuario)
+	respuestas = obtenerPreguntas(iD)
+	print(respuestas)
+	iten = 'Esta es la repuesta que el usuario contesto'
+	if request.method == 'POST':
+			#guardarPreguntas(request)
+			#actualizarReclamo(request)
+			#print(numeroDui, "CAMBIO")
+			return redirect('inicio')
+	return render(request, 'mantenimientoUsuario.html', {'reclamo':reclamo, 'respuestas':respuestas, 'iten':iten})
+
+def obtenerPreguntas(dui):
+	listaRespuestas = list()
+	respuesta1 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 1).exists()
+	if respuesta1 == True:
+		listaRespuestas.append("1 ¿Está de acuerdo con las medidas tomadas por el Goes respecto al paro de  trasporte?")
+		#listaRespuestas[0] = 'Está de acuerdo con las medidas tomadas por el Goes respecto al paro de  trasporte'
+	
+	respuesta2 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 2).exists()
+	if respuesta2 == True:
+		listaRespuestas.append("2 ¿Cree que dicha medida haya contribuido para contener el virus? ")
+	
+	respuesta3 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 3).exists()	
+	if respuesta3:
+		listaRespuestas.append("3 ¿Conoce a alguien que haya perdido su empleo (ya sea de forma formal o informal) a falta del problema de trasporte?")
+
+	respuesta4 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 4).exists()	
+	if respuesta4:
+		listaRespuestas.append("4 ¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?")
+	
+	respuesta5 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 5).exists()	
+	if respuesta5:
+		listaRespuestas.append("5 ¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?")
+
+	respuesta6 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 6).exists()	
+	if respuesta6:
+		listaRespuestas.append("6 ¿Se ha visto en la necesidad de pedir ride o caminar largos tramos para dirigirse a su destino?")
+
+	respuesta7 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 7).exists()	
+	if respuesta7:
+		listaRespuestas.append("7 ¿Su economía ha sido afectada al contratar trasporte privado para movilizarse?")		
+
+	respuesta8 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 8).exists()	
+	if respuesta8:
+		listaRespuestas.append("8 ¿Considera que es necesario que los automóviles cumplan con todos los protocolos sanitarios aunque eso requiera de más gastos y recursos económicos?")
+
+	respuesta9 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 9).exists()	
+	if respuesta9:
+		listaRespuestas.append("9 ¿Sera necesario el aumento de tarifa para compensar los ingresos perdidos?")		
+				
+	return listaRespuestas	
+
+				
 		
-
-
-
-
 			
 

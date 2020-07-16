@@ -1,0 +1,31 @@
+
+{% block content%}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Dui</td>
+			<td>Nombres</td>
+			<td>Apellidos</td>
+			<td>Fecha de creacion</td>
+			<td>Realizado</td>
+		</tr>
+	</thead>
+	<h1>Listados de usuarios </h1>
+		<tbody>
+			{% if reclamos %}
+			{% for reclamo in reclamos %}
+			<tr>
+				<td>{{reclamo.idreclamo.dui}}</td>
+				<td>{{reclamo.idreclamo.nombre}}</td>
+				<td>{{reclamo.fecha_creacion}}</td>
+				<td>{{reclamo.realizado}}</td>
+				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Vista s</a></td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1>No hay registro de usuarios</h1>
+			{% endif %}
+			
+		</tbody>
+</table>
+{%endblock%}

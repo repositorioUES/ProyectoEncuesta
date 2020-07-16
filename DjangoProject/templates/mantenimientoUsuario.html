@@ -1,0 +1,46 @@
+
+{% block content%}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Dui</td>
+			<td>Nombres</td>
+			<td>Apellidos</td>
+			<td>Fecha de creacion</td>
+			<td>Realizado</td>
+		</tr>
+	</thead>
+	<h1>  </h1>
+		<tbody>
+			{% if reclamo %}
+			<tr>
+				<td>{{reclamo.idreclamo.dui}}</td>
+				<td>{{reclamo.idreclamo.nombre}}</td>
+				<td>{{reclamo.fecha_creacion}}</td>
+				<td>{{reclamo.realizado}}</td>
+				{% if reclamo.realizado %}
+				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Vista s</a></td>
+				{% endif %}
+			</tr>
+			{% else %}
+			<h1>No hay registro de usuarios</h1>
+			{% endif %}
+		</tbody>
+</table>
+<h3>Respuestas del Usuario</h3>
+	{% if respuestas %}
+			{% for respuesta in respuestas %}
+				<thead>
+					<tr>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<li>{{respuesta}}<input type="checkbox" name="p1" value="1" checked=""></li>
+					</tr>
+				</tbody>
+			{% endfor %}
+			<label></label>
+			{% endif %}	
+{%endblock%}
