@@ -23,7 +23,10 @@
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
 				{% if reclamo.realizado == False %}
-				<td><button class="btn btn-primary" type="submit">Eliminar</button></td>
+				<form method="POST">
+					{% csrf_token %}
+					<td><button class="btn btn-primary" type="submit">Eliminar</button></td>
+				</form>
 				{% endif %}
 			</tr>
 			{% else %}
@@ -46,6 +49,6 @@
 				</tbody>
 			{% endfor %}
 			<br>
-			<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea
+			<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea>
 			{% endif %}	
 {%endblock%}

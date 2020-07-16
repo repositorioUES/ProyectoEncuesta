@@ -208,7 +208,7 @@ def actualizarReclamo(request):
 		Reclamo.objects.filter(idreclamo = usuario).update(descripcion = preguntaOpcional,realizado = True)
 		print("DENTRO DEL IF")
 
-class ListaUsuario(ListView, ):
+class ListaUsuario(ListView):
 		template_name = 'listarUsuarios.html'
 		#context_objects_name = 'reclamos'
 		#queryset = Reclamo.objects.all()
@@ -225,10 +225,8 @@ def mantenerUsuario(request, iD):
 	print(respuestas)
 	iten = 'Esta es la repuesta que el usuario contesto'
 	if request.method == 'POST':
-			#guardarPreguntas(request)
-			#actualizarReclamo(request)
-			#print(numeroDui, "CAMBIO")
-			return redirect('inicio')
+		usuario.delete()
+		return redirect('listado_usuario')
 	return render(request, 'mantenimientoUsuario.html', {'reclamo':reclamo, 'respuestas':respuestas, 'iten':iten})
 
 def obtenerPreguntas(dui):
