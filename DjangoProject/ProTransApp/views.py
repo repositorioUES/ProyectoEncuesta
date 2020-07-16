@@ -23,16 +23,15 @@ def loginT(request):
 			return HttpResponseRedirect(reverse('inicio'))
 		else:
 			messages.error(request,'Credenciales incorrectas')
-
 	return render(request,'login.html',{})
 
 def logoutT(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('inicio'))
 
-
 class Inicio(TemplateView):
 	template_name = 'index.html'
+
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -69,6 +68,7 @@ class Inicio(TemplateView):
 		return context
 
 #noDui = ""
+
 class UsuarioCrear(CreateView):
 	model = Usuario
 	form_class = UsuarioForm
