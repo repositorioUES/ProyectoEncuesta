@@ -1,4 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
 {% block content%}
 <table class="table table-bordered">
 	<thead>
@@ -8,6 +21,7 @@
 			<td>Apellidos</td>
 			<td>Fecha de creacion</td>
 			<td>Realizado</td>
+			<td>Opcion</td>
 		</tr>
 	</thead>
 	<h1>Listados de usuarios </h1>
@@ -17,9 +31,10 @@
 			<tr>
 				<td>{{reclamo.idreclamo.dui}}</td>
 				<td>{{reclamo.idreclamo.nombre}}</td>
+				<td>{{reclamo.idreclamo.apellidos}}</td>
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
-				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Vista s</a></td>
+				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Ver Registro</a></td>
 			</tr>
 			{% endfor %}
 			{% else %}
@@ -29,3 +44,6 @@
 		</tbody>
 </table>
 {%endblock%}
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

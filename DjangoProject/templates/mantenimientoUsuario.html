@@ -19,7 +19,7 @@
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
 				{% if reclamo.realizado %}
-				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Vista s</a></td>
+				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Eliminar</a></td>
 				{% endif %}
 			</tr>
 			{% else %}
