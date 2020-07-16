@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
 from django.views.generic import TemplateView,CreateView
+from .models import Usuario, Respuesta, Tipo_transporte,Departamento,Municipio
 from .models import Usuario, Respuesta, Tipo_transporte, Reclamo 
 from .forms import UsuarioForm, RespuestaForm
 from django.shortcuts import redirect
@@ -45,6 +46,26 @@ class Inicio(TemplateView):
 		context["p7"] = Respuesta.objects.filter(numerodepregunta=7).count()
 		context["p8"] = Respuesta.objects.filter(numerodepregunta=8).count()
 		context["p9"] = Respuesta.objects.filter(numerodepregunta=9).count()
+		context["dep1"] = Usuario.objects.filter(departamento=1).count()
+		context["dep2"] = Usuario.objects.filter(departamento=2).count()
+		context["dep3"] = Usuario.objects.filter(departamento=3).count()
+		context["dep4"] = Usuario.objects.filter(departamento=4).count()
+		context["dep5"] = Usuario.objects.filter(departamento=5).count()
+		context["dep6"] = Usuario.objects.filter(departamento=6).count()
+		context["dep7"] = Usuario.objects.filter(departamento=7).count()
+		context["dep8"] = Usuario.objects.filter(departamento=8).count()
+		context["dep9"] = Usuario.objects.filter(departamento=9).count()
+		context["dep10"] = Usuario.objects.filter(departamento=10).count()
+		context["dep11"] = Usuario.objects.filter(departamento=11).count()
+		context["dep12"] = Usuario.objects.filter(departamento=12).count()
+		context["dep13"] = Usuario.objects.filter(departamento=13).count()
+		context["dep14"] = Usuario.objects.filter(departamento=14).count()
+		context["privado"] = Usuario.objects.filter(tipo_transporte=1).count()
+		context["publico"] = Usuario.objects.filter(tipo_transporte=2).count()
+		context["masculino"] = Usuario.objects.filter(sexo='M').count()
+		context["femenino"] = Usuario.objects.filter(sexo='F').count()
+		
+
 		return context
 
 #noDui = ""
@@ -62,8 +83,12 @@ class UsuarioCrear(CreateView):
 		sex = request.POST.get('sexo')
 		dom = request.POST.get('domicilio')
 		tipo = request.POST.get('tipo_transporte')
-		ipoTrasporte = Tipo_transporte.objects.get(tipo_transporte = tipo)		
-		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte)
+		ipoTrasporte = Tipo_transporte.objects.get(tipo_transporte = tipo)
+		dep = request.POST.get('departamento')
+		Ddepartamento = Departamento.objects.get(idDepartamento = dep)
+		mun = request.POST.get('municipio')
+		Mmunicipio = Municipio.objects.get(idMunicipio = mun)		
+		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte, departamento = Ddepartamento, municipio = Mmunicipio)
 		usuario.save()
 		obtenerDui(request)
 		crearReclamo(request)

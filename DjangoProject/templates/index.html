@@ -16,15 +16,16 @@
   <body> 
 
   {% block scripts %}
-  <script>
+  <script><!-- Grafico de preguntas -->
     $(document).ready(function(){
         var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Pregunta 1','Pregunta 2','Pregunta 3','Pregunta 4','Pregunta 5','Pregunta 6','Pregunta 8','Pregunta 8','Pregunta 9',],
+                labels: ['Pregunta 1','Pregunta 2','Pregunta 3','Pregunta 4','Pregunta 5','Pregunta 6','Pregunta 7','Pregunta 8','Pregunta 9',],
                 datasets: [{
-                    label: '# de Votos',
+                    label: 'Respuestas',
                     data: [{{ p1 }},{{p2}},{{p3}},{{p4}},{{p5}},{{p6}},{{p7}},{{p8}},{{p9}}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
@@ -63,16 +64,229 @@
                 }
             }
         });
-    });
+  });
+  </script>
 
+  <script><!-- Grafico de reclamos por departamento -->
+    $(document).ready(function(){
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Ahuachapán','Santa Ana','Sonsonate','La Libertad','Chalatenango','San Salvador','Cuscatlán','La Paz','Cabañas','San Vicente','Usulután','Morazán','San Miguel','La Unión',],
+                datasets: [{
+                    label: 'Reclamos por departamento',
+                    data: [{{ dep1 }},{{dep2}},{{dep3}},{{dep4}},{{dep5}},{{dep6}},{{dep7}},{{dep8}},{{dep9}},{{dep10}},{{dep11}},{{dep12}},{{dep13}},{{dep14}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(145, 244, 19, 0.7)',
+                        'rgba(206, 112, 112, 0.7)',
+                        'rgba(44, 7, 253, 0.7)',
+                        'rgba(7, 144, 113, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(60, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(145, 244, 19, 1)',
+                        'rgba(206, 112, 112, 1)',
+                        'rgba(44, 7, 253, 1)',
+                        'rgba(7, 144, 113, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+  });
+  </script>
+
+  <script><!-- Grafico de Sexos -->
+    $(document).ready(function(){
+        var ctx3 = document.getElementById('myChart3').getContext('2d');
+        var myChart3 = new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: ['Masculino','Femenino',],
+                datasets: [{
+                    label: 'Reclamos por genero',
+                    data: [{{ masculino }},{{ femenino }}],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+  });
+  </script>
+
+  <script><!-- Grafico de Tipos de transporte -->
+    $(document).ready(function(){
+        var ctx4 = document.getElementById('myChart4').getContext('2d');
+        var myChart4 = new Chart(ctx4, {
+            type: 'pie',
+            data: {
+                labels: ['Privado','Publico',],
+                datasets: [{
+                    label: 'Reclamos por Tipo de Transporte ',
+                    data: [{{ privado }},{{ publico }}],
+                    backgroundColor: [
+                        'rgba(145, 244, 19, 0.7)',
+                        'rgba(255, 99, 132, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(145, 244, 19, 0.1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+  });
   </script>
   {% endblock scripts %}
 
   {% block content %}
   <h1>Resultados</h1>
-  <div >
+  <div ><!-- div para grafico de preguntas-->
     <canvas id="myChart" width="300" height="100"></canvas>
   </div>
+  <p>
+    <p>
+      <p>
+
+      <div class="row"><!-- div TABLA DE RESULTADOS -->
+          <div class="col-md-8 col-md-offset-2 ">
+            <div class="page-header">
+              <h2 align="center" id="tables">Resultados</h2>
+            </div>
+              <table class="table table-striped table-hover" >
+                <thead>
+                  <tr class="warning">
+                    <th> #</th>
+                    <th>Pregunta </th>
+                    <th>#-Respuestas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="info">
+                    <td>1</td>
+                    <td>¿Está de acuerdo con las medidas tomadas por el Goes respecto al paro de  trasporte?</td>
+                    <td class="text-center">{{ p1 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>2</td>
+                    <td>¿Cree que dicha medida haya contribuido para contener el virus?</td>
+                    <td class="text-center">{{ p2 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>3</td>
+                    <td>¿Conoce a alguien que haya perdido su empleo (ya sea de forma formal o informal) a falta del problema de trasporte?</td>
+                    <td class="text-center">{{ p3 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>4</td>
+                    <td>¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?</td>
+                    <td class="text-center" >{{ p4 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>5</td>
+                    <td>¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?</td>
+                    <td class="text-center">{{ p5 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>6</td>
+                    <td>¿Se ha visto en la necesidad de pedir ride o caminar largos tramos para dirigirse a su destino?</td>
+                    <td class="text-center">{{ p6 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>7</td>
+                    <td>¿Su economía ha sido afectada al contratar trasporte privado para movilizarse?</td>
+                    <td class="text-center">{{ p7 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>8</td>
+                    <td>¿Considera que es necesario que los automóviles cumplan con todos los protocolos sanitarios aunque eso requiera de más gastos y recursos económicos?</td>
+                    <td class="text-center">{{ p8 }}</td>
+                  </tr>
+                  <tr class="info">
+                    <td>9</td>
+                    <td>¿Sera necesario el aumento de tarifa para compensar los ingresos perdidos?</td>
+                    <td class="text-center">{{ p9 }}</td>
+                  </tr>
+                </tbody>
+              </table> 
+          </div>
+        </div>
+
+  <div ><!-- div para grafico de reclamos por departamentos-->
+    <canvas id="myChart2" width="300" height="100"></canvas>
+  </div>
+  
+  <p><h2 align="center">Número de usuarios por Sexo </h2>
+  <div>
+    <canvas id="myChart3" width="300" height="100"></canvas>
+  </div>
+  
+  <p><h2 align="center">Tipos de transporte elegidos </h2>
+  <div>
+    <canvas id="myChart4" width="300" height="100"></canvas>
+  </div>
+
+
+
+
+
   {% endblock content%}
 
 

@@ -10,9 +10,11 @@ class UsuarioForm(forms.ModelForm):
 		'nombre',
 		'apellidos',
 		'edad',
-		'sexo',
 		'domicilio',
-		'tipo_transporte'
+		'sexo',
+		'tipo_transporte',
+		'departamento',
+		'municipio'
 		]
 
 		labels = {
@@ -20,9 +22,11 @@ class UsuarioForm(forms.ModelForm):
 		'nombre' : 'Nombres',
 		'apellidos' :'Apellidos',
 		'edad' : 'Edad',
-		'sexo' : 'Sexo',
 		'domicilio' : 'Domicilio',
+		'sexo' : 'Sexo',
 		'tipo_transporte' : 'Tipo de Transporte' ,
+		'departamento' : 'Departamento',
+		'municipio' : 'Municipio',
 		}
 
 		widgets = {
@@ -30,9 +34,11 @@ class UsuarioForm(forms.ModelForm):
 			'nombre':forms.TextInput(attrs={'placeholder': "ingrese sus nombres",'class':'form-control'}),
 			'apellidos':forms.TextInput(attrs={'placeholder': "ingrese sus apellidos",'class':'form-control'}),
 			'edad':forms.NumberInput(attrs={'placeholder': "ingrese su edad",'class':'form-control'}),
-			'sexo':forms.Select(attrs={'class':'form-control'}),
 			'domicilio':forms.TextInput(attrs={'placeholder': "ingrese su dirección completa ",'class':'form-control'}),
+			'sexo':forms.Select(attrs={'class':'form-control'}),
 			'tipo_transporte':forms.Select(attrs={'class':'form-control'}),
+			'departamento':forms.Select(attrs={'class':'form-control'}),
+			'municipio':forms.Select(attrs={'class':'form-control'}),
 		}
 		
 
