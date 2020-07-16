@@ -208,7 +208,7 @@ def actualizarReclamo(request):
 		Reclamo.objects.filter(idreclamo = usuario).update(descripcion = preguntaOpcional,realizado = True)
 		print("DENTRO DEL IF")
 
-class ListaUsuario(ListView):
+class ListaUsuario(ListView, ):
 		template_name = 'listarUsuarios.html'
 		#context_objects_name = 'reclamos'
 		#queryset = Reclamo.objects.all()

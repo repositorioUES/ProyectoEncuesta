@@ -1,4 +1,4 @@
-
+{% extends 'plantillaBoost.html' %}
 {% block content%}
 <table class="table table-bordered">
 	<thead>
@@ -8,6 +8,9 @@
 			<td>Apellidos</td>
 			<td>Fecha de creacion</td>
 			<td>Realizado</td>
+			{% if reclamo.realizado == False %}
+			<td>Opcion</td>
+			{% endif %}
 		</tr>
 	</thead>
 	<h1>  </h1>
@@ -16,10 +19,11 @@
 			<tr>
 				<td>{{reclamo.idreclamo.dui}}</td>
 				<td>{{reclamo.idreclamo.nombre}}</td>
+				<td>{{reclamo.idreclamo.apellidos}}</td>
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
-				{% if reclamo.realizado %}
-				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Eliminar</a></td>
+				{% if reclamo.realizado == False %}
+				<td><button class="btn btn-primary" type="submit">Eliminar</button></td>
 				{% endif %}
 			</tr>
 			{% else %}
@@ -37,10 +41,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<li>{{respuesta}}<input type="checkbox" name="p1" value="1" checked=""></li>
+						<li>{{respuesta}}<input type="checkbox" name="p1" value="1" checked="" disabled></li>
 					</tr>
 				</tbody>
 			{% endfor %}
-			<label></label>
+			<br>
+			<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea
 			{% endif %}	
 {%endblock%}
