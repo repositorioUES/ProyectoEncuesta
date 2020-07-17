@@ -7,13 +7,12 @@ class Usuario(models.Model):
 	dui = models.CharField(primary_key = True, max_length = 10)
 	nombre = models.CharField(max_length = 30)
 	apellidos = models.CharField(max_length = 30)
-	edad = models.IntegerField()
+	edad = models.PositiveSmallIntegerField()
 	domicilio = models.CharField(max_length = 50)
 	sexos = (('F','Femenino'),('M', 'Masculino'))
 	sexo = models.CharField(max_length = 1,choices=sexos)
 	tipo_transporte = models.ForeignKey('Tipo_transporte', models.DO_NOTHING)
 	departamento = models.ForeignKey('Departamento', models.DO_NOTHING, db_column='departamento')
-	municipio = models.ForeignKey('Municipio', models.DO_NOTHING, db_column='municipio')
 
 	def __str__(self):
 		return self.nombre
@@ -34,18 +33,7 @@ class Departamento(models.Model):
 	def __str__(self):
 		return self.nombreDepartamento
 
-#Tabla Municipio
-class Municipio(models.Model):
-	idMunicipio = models.AutoField(primary_key = True)
-	nombreMunicipio = models.CharField(max_length = 50)
-	departamentoMun = models.ForeignKey('Departamento', models.DO_NOTHING, db_column='departamentoMun')
-
-	def __str__(self):
-		return self.nombreMunicipio
-
-	class Meta:
-		ordering = ["nombreMunicipio"]
-
+#Tabla Reclamo
 class Reclamo(models.Model):
     idreclamo = models.ForeignKey('Usuario', on_delete = models.CASCADE, db_column='dui',primary_key = True)
     realizado = models.BooleanField(null = False)
@@ -56,7 +44,7 @@ class Reclamo(models.Model):
         managed = True
         db_table = 'reclamo'
 
-
+#Tabla Respuesta
 class Respuesta(models.Model):
     idrespuesta = models.AutoField(primary_key=True)
     dui = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='dui')

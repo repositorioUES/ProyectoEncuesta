@@ -11,11 +11,7 @@ urlpatterns = [
   path('accounts/login/', loginT, name = 'login'),
   path('logout/', logoutT, name = 'logout'),
   path('CrearUsuario/', UsuarioCrear.as_view(), name= 'crear_usuario'),
-  path('encuestados/', ListaUsuario.as_view(), name= 'listado_usuario'),
+  path('encuestados/', login_required(ListaUsuario.as_view()), name= 'listado_usuario'),
   path('LlenarEncuesta/', Encuesta, name= 'llenar_e'),
-  path('verUsuario/<iD>',mantenerUsuario , name= 'ver_usu'),
-  #path('CrearUs/', UsuarioC, name= 'usuario_crear'),
-  #path('CrearUsuario/Seleccionar', SeleccionarTransporte.as_view(), name= 'seleccionar'),
- 
-    
+  path('verUsuario/<iD>', login_required(mantenerUsuario) , name= 'ver_usu'),
 ]

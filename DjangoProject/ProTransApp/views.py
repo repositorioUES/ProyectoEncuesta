@@ -4,13 +4,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
 from django.views.generic import TemplateView,CreateView,ListView,View
-from .models import Usuario, Respuesta, Tipo_transporte,Departamento,Municipio
-from .models import Usuario, Respuesta, Tipo_transporte, Reclamo 
+from .models import Usuario, Respuesta, Tipo_transporte,Departamento,Reclamo
 from .forms import UsuarioForm, RespuestaForm
 from django.shortcuts import redirect
 
 # Create your views here.
-#model = None
 
 def loginT(request):
 	if request.method == "POST":
@@ -67,7 +65,6 @@ class Inicio(TemplateView):
 
 		return context
 
-#noDui = ""
 
 class UsuarioCrear(CreateView):
 	model = Usuario
@@ -85,10 +82,8 @@ class UsuarioCrear(CreateView):
 		tipo = request.POST.get('tipo_transporte')
 		ipoTrasporte = Tipo_transporte.objects.get(tipo_transporte = tipo)
 		dep = request.POST.get('departamento')
-		Ddepartamento = Departamento.objects.get(idDepartamento = dep)
-		mun = request.POST.get('municipio')
-		Mmunicipio = Municipio.objects.get(idMunicipio = mun)		
-		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte, departamento = Ddepartamento, municipio = Mmunicipio)
+		Ddepartamento = Departamento.objects.get(idDepartamento = dep)		
+		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte, departamento = Ddepartamento)
 		usuario.save()
 		obtenerDui(request)
 		crearReclamo(request)
@@ -202,7 +197,6 @@ def guardarPreguntas(request):
 def actualizarReclamo(request):
 	usuario = Usuario.objects.get(dui =numeroDui)
 	res = Respuesta.objects.filter(dui = usuario).exists()
-	#print(bandera, reclamo)
 	if res == True:
 		preguntaOpcional = request.POST.get('campoOpcional')
 		Reclamo.objects.filter(idreclamo = usuario).update(descripcion = preguntaOpcional,realizado = True)
@@ -268,9 +262,6 @@ def obtenerPreguntas(dui):
 	if respuesta9:
 		listaRespuestas.append("9 ¿Sera necesario el aumento de tarifa para compensar los ingresos perdidos?")		
 				
-	return listaRespuestas	
+	return listaRespuestas
 
-				
-		
-			
-
+	

@@ -14,7 +14,6 @@ class UsuarioForm(forms.ModelForm):
 		'sexo',
 		'tipo_transporte',
 		'departamento',
-		'municipio'
 		]
 
 		labels = {
@@ -26,7 +25,6 @@ class UsuarioForm(forms.ModelForm):
 		'sexo' : 'Sexo',
 		'tipo_transporte' : 'Tipo de Transporte' ,
 		'departamento' : 'Departamento',
-		'municipio' : 'Municipio',
 		}
 
 		widgets = {
@@ -38,7 +36,6 @@ class UsuarioForm(forms.ModelForm):
 			'sexo':forms.Select(attrs={'class':'form-control'}),
 			'tipo_transporte':forms.Select(attrs={'class':'form-control'}),
 			'departamento':forms.Select(attrs={'class':'form-control'}),
-			'municipio':forms.Select(attrs={'class':'form-control'}),
 		}
 		
 

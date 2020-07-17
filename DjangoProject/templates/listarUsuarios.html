@@ -1,11 +1,6 @@
-{% extends 'plantillaBoost.html' %}
-{% block header%}
-<header>
-	<div class="container-fluid">
-		<a href="{% url 'inicio'%}">Inicio</a>
-	</div>
-</header>
-	{% endblock%}
+{% extends 'base.html' %}
+
+<title>{% block title %}Listado de Usuarios{% endblock title%} </title>
 {% block content %}
 <div class="container">
 	<table class="table table-bordered">

@@ -5,5 +5,4 @@ from .models import *
 admin.site.register(Usuario)
 admin.site.register(Tipo_transporte)
 admin.site.register(Departamento)
-admin.site.register(Municipio)
 admin.site.register(Respuesta)
