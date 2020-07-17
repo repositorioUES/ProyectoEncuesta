@@ -1,6 +1,7 @@
 {% extends 'plantillaBoost.html' %}
 {% block content%}
-<table class="table table-bordered">
+<div class="container">
+	<table class="table table-bordered">
 	<thead>
 		<tr>
 			<td>Dui</td>
@@ -25,7 +26,7 @@
 				{% if reclamo.realizado == False %}
 				<form method="POST">
 					{% csrf_token %}
-					<td><button class="btn btn-primary" type="submit">Eliminar</button></td>
+					<td><button class= "btn btn-danger" type="submit">Eliminar</button> <a class="btn btn-success" href="{% url 'listado_usuario' %}">Cancelar</a></td>
 				</form>
 				{% endif %}
 			</tr>
@@ -36,19 +37,26 @@
 </table>
 <h3>Respuestas del Usuario</h3>
 	{% if respuestas %}
+	<table>
+		<thead >
+				<tr>
+					<td></td>
+				</tr>	
+		</thead>
 			{% for respuesta in respuestas %}
-				<thead>
-					<tr>
-						<td></td>
-					</tr>
-				</thead>
 				<tbody>
 					<tr>
-						<li>{{respuesta}}<input type="checkbox" name="p1" value="1" checked="" disabled></li>
+						<ul list-style-type: none>
+							<td>{{respuesta}}</td>
+							<td>  <input type="checkbox" name="p1" value="1" checked="" disabled></td>
+						</ul>
 					</tr>
 				</tbody>
 			{% endfor %}
 			<br>
-			<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea>
+	</table>	
+	<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea>	
 			{% endif %}	
+</div>
+
 {%endblock%}

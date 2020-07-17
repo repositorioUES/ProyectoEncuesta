@@ -1,6 +1,14 @@
 {% extends 'plantillaBoost.html' %}
+{% block header%}
+<header>
+	<div class="container-fluid">
+		<a href="{% url 'inicio'%}">Inicio</a>
+	</div>
+</header>
+	{% endblock%}
 {% block content %}
-<table class="table table-bordered">
+<div class="container">
+	<table class="table table-bordered">
 	<thead>
 		<tr>
 			<td>Dui</td>
@@ -21,7 +29,7 @@
 				<td>{{reclamo.idreclamo.apellidos}}</td>
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
-				<td><a ass="btn btn-success" class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Ver Registro</a></td>
+				<td><a class="btn btn-success" href="{% url 'ver_usu' reclamo.idreclamo.dui %}">Ver Registro</a></td>
 			</tr>
 			{% endfor %}
 			{% else %}
@@ -29,5 +37,7 @@
 			{% endif %}
 			
 		</tbody>
-</table>	
+</table>
+</div>
+
 {% endblock %}
