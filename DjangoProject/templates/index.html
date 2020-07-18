@@ -19,7 +19,6 @@
   <script><!-- Grafico de preguntas -->
     $(document).ready(function(){
         var ctx = document.getElementById('myChart').getContext('2d');
-        var ctx2 = document.getElementById('myChart2').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -131,7 +130,7 @@
     $(document).ready(function(){
         var ctx3 = document.getElementById('myChart3').getContext('2d');
         var myChart3 = new Chart(ctx3, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ['Masculino','Femenino',],
                 datasets: [{
@@ -231,7 +230,7 @@
                   </tr>
                   <tr class="info">
                     <td>3</td>
-                    <td>¿Conoce a alguien que haya perdido su empleo (ya sea de forma formal o informal) a falta del problema de trasporte?</td>
+                    <td>¿Conoce a alguien que haya perdido su empleo (ya sea formal o informal) a falta del problema de trasporte?</td>
                     <td class="text-center">{{ p3 }}</td>
                   </tr>
                   <tr class="info">
@@ -241,7 +240,7 @@
                   </tr>
                   <tr class="info">
                     <td>5</td>
-                    <td>¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?</td>
+                    <td>¿Cuenta usted con tansporte propio (Automovil, motocicleta)?</td>
                     <td class="text-center">{{ p5 }}</td>
                   </tr>
                   <tr class="info">

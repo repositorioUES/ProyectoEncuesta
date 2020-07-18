@@ -244,7 +244,7 @@ def obtenerPreguntas(dui):
 	
 	respuesta5 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 5).exists()	
 	if respuesta5:
-		listaRespuestas.append("5 ¿Considera que debe haber un cupo máximo de pasajeros en las unidades de trasporte?")
+		listaRespuestas.append("5 ¿Cuenta usted con tansporte propio (Automovil, motocicleta)?")
 
 	respuesta6 = Respuesta.objects.filter(dui = dui).filter(numerodepregunta = 6).exists()	
 	if respuesta6:
