@@ -39,24 +39,28 @@
 </table>
 <h3>Respuestas del Usuario</h3>
 	{% if respuestas %}
-	<table>
-		<thead >
-				<tr>
-					<td></td>
-				</tr>	
-		</thead>
-			{% for respuesta in respuestas %}
-				<tbody>
+
+	<div style='width: 650px;'></td>
+		<table class="table">
+			<thead >
 					<tr>
-						<ul list-style-type: none>
-							<td>{{respuesta}}</td>
-							<td>  <input type="checkbox" name="p1" value="1" checked="" disabled></td>
-						</ul>
-					</tr>
-				</tbody>
-			{% endfor %}
+						<td style='width: 650px;'></td>
+					</tr>	
+			</thead>
+				{% for respuesta in respuestas %}
+					<tbody>
+						<tr>
+							<ul list-style-type: none>
+								<td>{{respuesta}}</td>
+								<td>  <input type="checkbox" name="p1" value="1" checked="" disabled></td>
+							</ul>
+						</tr>
+					</tbody>
+				{% endfor %}
 			<br>
-	</table>	
+	</table>
+	</div>
+	<label>Nos interesa conocer su opinión acerca del problema de trasporte generado por la pandemia mundial</label>	
 	<textarea name="textarea" rows="6" cols="80" readonly>{{reclamo.descripcion}}</textarea>	
 			{% endif %}	
 </div>

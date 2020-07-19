@@ -28,7 +28,7 @@ class UsuarioForm(forms.ModelForm):
 		}
 
 		widgets = {
-			'dui':forms.TextInput(attrs={'placeholder': "ingrese su número de DUI",'class':'form-control'}),
+			'dui':forms.TextInput(attrs={'placeholder': "00000000-0",'class':'form-control'}),
 			'nombre':forms.TextInput(attrs={'placeholder': "ingrese sus nombres",'class':'form-control'}),
 			'apellidos':forms.TextInput(attrs={'placeholder': "ingrese sus apellidos",'class':'form-control'}),
 			'edad':forms.NumberInput(attrs={'placeholder': "ingrese su edad",'class':'form-control'}),

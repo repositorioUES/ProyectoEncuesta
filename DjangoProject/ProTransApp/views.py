@@ -72,23 +72,40 @@ class UsuarioCrear(CreateView):
 	template_name = 'Usuario_Form.html'
 
 	def post(self, request, *args, **kwargs):
-		#global noDui
-		noDui = request.POST.get('dui') 
-		nom = request.POST.get('nombre')
-		apel = request.POST.get('apellidos')
+		noDui = request.POST.get('dui')
+		validarDui(noDui) 
 		ed = request.POST.get('edad') 
-		sex = request.POST.get('sexo')
-		dom = request.POST.get('domicilio')
-		tipo = request.POST.get('tipo_transporte')
-		ipoTrasporte = Tipo_transporte.objects.get(tipo_transporte = tipo)
-		dep = request.POST.get('departamento')
-		Ddepartamento = Departamento.objects.get(idDepartamento = dep)		
-		usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte, departamento = Ddepartamento)
-		usuario.save()
-		obtenerDui(request)
-		crearReclamo(request)
-		return redirect('llenar_e')
+		usuarioValido = Usuario.objects.filter(dui = noDui).exists()
+		if validarDui(noDui) and len(noDui) == 10 and int(ed) >= 18 and usuarioValido == False:
+				nom = request.POST.get('nombre')
+				apel = request.POST.get('apellidos')
+				sex = request.POST.get('sexo')
+				dom = request.POST.get('domicilio')
+				tipo = request.POST.get('tipo_transporte')
+				ipoTrasporte = Tipo_transporte.objects.get(tipo_transporte = tipo)
+				dep = request.POST.get('departamento')
+				Ddepartamento = Departamento.objects.get(idDepartamento = dep)		
+				usuario = Usuario(dui = noDui, nombre = nom, apellidos = apel, edad = ed, sexo = sex, domicilio = dom, tipo_transporte = ipoTrasporte, departamento = Ddepartamento)
+				usuario.save()
+				obtenerDui(request)
+				crearReclamo(request)
+				return redirect('llenar_e')
+		return redirect('crear_usuario')	
+def validarDui(duiUsuario):
+	try:
+		subCadena = duiUsuario[0:8]
+		print(subCadena, duiUsuario)
+		int(subCadena)
+		ultimoValor = duiUsuario[9]
+		int(ultimoValor)
+		print(subCadena, ultimoValor)
+		return True
+	except:
+		return False
+	
+	
 
+	pass
 def crearReclamo(request):
 	usuario = Usuario.objects.get(dui =numeroDui)
 	existe = Reclamo.objects.filter(idreclamo = usuario).exists()
