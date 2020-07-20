@@ -90,7 +90,12 @@ class UsuarioCrear(CreateView):
 				obtenerDui(request)
 				crearReclamo(request)
 				return redirect('llenar_e')
-		messages.error(request,'Datos incorrectos, Verifique DUI o edad')
+		if validarDui(noDui) == False:
+			messages.error(request,'El formato del DUI es incorrecto')
+		if int(ed) < 18:
+			messages.error(request,'Usuario debe ser mayor de edad')
+		if usuarioValido == True:
+			messages.error(request,'Este usuario ya realizo un reclamo')		
 		return redirect('crear_usuario')
 
 
