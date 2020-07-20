@@ -13,7 +13,6 @@
 			<td>Domicilio</td>
 			<td>Sexo</td>
 			<td>Departamento</td>
-			<td>Tipo de Transporte</td>
 			<td>Fecha de creacion</td>
 			<td>Realizado</td>
 			{% if reclamo.realizado == False %}
@@ -32,7 +31,6 @@
 				<td>{{reclamo.idreclamo.domicilio}}</td>
 				<td>{{reclamo.idreclamo.sexo}}</td>
 				<td>{{reclamo.idreclamo.departamento}}</td>
-				<td>{{reclamo.idreclamo.tipo_transporte}}</td>
 				<td>{{reclamo.fecha_creacion}}</td>
 				<td>{{reclamo.realizado}}</td>
 				{% if reclamo.realizado == False %}
