@@ -93,13 +93,15 @@ class UsuarioCrear(CreateView):
 		return redirect('crear_usuario')	
 def validarDui(duiUsuario):
 	try:
-		subCadena = duiUsuario[0:8]
-		print(subCadena, duiUsuario)
-		int(subCadena)
-		ultimoValor = duiUsuario[9]
-		int(ultimoValor)
-		print(subCadena, ultimoValor)
-		return True
+		if duiUsuario[8] == '-':
+			subCadena = duiUsuario[0:8]
+			print(duiUsuario[8], subCadena, duiUsuario)
+			int(subCadena)
+			ultimoValor = duiUsuario[9]
+			int(ultimoValor)
+			print(subCadena, ultimoValor)
+			return True
+		return False	
 	except:
 		return False
 	
