@@ -90,7 +90,10 @@ class UsuarioCrear(CreateView):
 				obtenerDui(request)
 				crearReclamo(request)
 				return redirect('llenar_e')
-		return redirect('crear_usuario')	
+		messages.error(request,'Datos incorrectos, Verifique DUI o edad')
+		return redirect('crear_usuario')
+
+
 def validarDui(duiUsuario):
 	try:
 		if duiUsuario[8] == '-':
@@ -104,10 +107,7 @@ def validarDui(duiUsuario):
 		return False	
 	except:
 		return False
-	
-	
 
-	pass
 def crearReclamo(request):
 	usuario = Usuario.objects.get(dui =numeroDui)
 	existe = Reclamo.objects.filter(idreclamo = usuario).exists()
